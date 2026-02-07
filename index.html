@@ -14,6 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: system-ui, sans-serif;
+  overflow: hidden;
 }
 
 .card {
@@ -62,12 +63,38 @@ button {
 .hidden {
   display: none;
 }
+
+/* ❤️ Hearts animation */
+.hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 5s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh) scale(1.5);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 <body>
 
 <div class="card" id="ask">
-  <img src="https://gifdb.com/images/high/milk-and-mocha-love-me-rg6ve4g0z8mip842.gif" />
+  <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" />
   <h1>Will you be my Valentine?</h1>
 
   <div class="buttons">
@@ -77,14 +104,16 @@ button {
 </div>
 
 <div class="card hidden" id="result">
-  <img src="rose.png.png" />
+  <img src="https://raw.githubusercontent.com/abinesh2110/will-you-be-my-valentine/main/rose.png.png" />
   <h1>Happy Rose Day</h1>
-  <p>Love you Bharathiiiiiiiiiiiiiiiiiiiiii</p>
+  <p><strong>Love you Bharathiiiiiiiiiiiiiiiiiiiiii</strong></p>
 </div>
 
-<script>
-const noBtn = document.getElementById("no");
+<div class="hearts" id="hearts"></div>
 
+<script>
+/* No button text changes */
+const noBtn = document.getElementById("no");
 const noTexts = [
   "No",
   "Are you sure?",
@@ -105,10 +134,30 @@ noBtn.addEventListener("click", () => {
   noBtn.textContent = noTexts[index];
 });
 
+/* Show result + hearts */
 document.getElementById("yes").onclick = () => {
   document.getElementById("ask").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
+  startHearts();
 };
+
+/* Hearts generator */
+function startHearts() {
+  const container = document.getElementById("hearts");
+
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.textContent = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+    heart.style.fontSize = 16 + Math.random() * 20 + "px";
+
+    container.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
+}
 </script>
 
 </body>
