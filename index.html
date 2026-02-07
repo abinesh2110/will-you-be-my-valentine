@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Will you be my Valentine?</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #f9c5d1, #fddde6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, sans-serif;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 380px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+img {
+  width: 180px;
+}
+
+h1 {
+  margin: 20px 0 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+button {
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#yes {
+  background: #22c55e;
+  color: white;
+}
+
+#no {
+  background: #ef4444;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div class="card" id="ask">
+  <img src="https://gifdb.com/images/high/milk-and-mocha-love-me-rg6ve4g0z8mip842.gif" />
+  <h1>Will you be my Valentine?</h1>
+
+  <div class="buttons">
+    <button id="yes">Yes</button>
+    <button id="no">No</button>
+  </div>
+</div>
+
+<div class="card hidden" id="result">
+  <img src="rose.png" />
+  <h1>Happy Rose Day</h1>
+  <p>Love you Bharathiiiiiiiiiiiiiiiiiiiiii</p>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+
+const noTexts = [
+  "No",
+  "Are you sure?",
+  "Think again",
+  "Pretty please",
+  "What if I ask nicely?",
+  "Just once?",
+  "You know you want to",
+  "Almost yes",
+  "Okay… maybe",
+  "Fine, you win"
+];
+
+let index = 0;
+
+noBtn.addEventListener("click", () => {
+  index = (index + 1) % noTexts.length;
+  noBtn.textContent = noTexts[index];
+});
+
+document.getElementById("yes").onclick = () => {
+  document.getElementById("ask").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+};
+</script>
+
+</body>
+</html>
